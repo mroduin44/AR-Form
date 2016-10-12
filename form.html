@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+function changeSelection() {
+    var x = document.getElementById("course");
+    var i = x.selectedIndex;
+    document.getElementById("demo").innerHTML = x.options[i].text;
+}
+</script>
+</head>
+<link rel="stylesheet" href="formCSS.css">
+<div class="container"> 
+ <document>
+  <form id="Accommodation" name="userform" action="" onsubmit="mailFunction()"method="get">
+    <h3>AR Accommodations Form</h3>
+    <fieldset>
+      <input type="text" id="Firstname" name="Firstname" placeholder="First name" tabindex="1" required autofocus>
+    </fieldset>
+	<fieldset>
+      <input type="text" id="Lastname" name="Lastname" placeholder="Last name" tabindex="2" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input type="text" id="StudentID" name="StudentID" placeholder="Student ID" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <input type="Email" id="Email" name="Email" placeholder="Your Email Address" tabindex="4" required>
+    </fieldset>
+    <fieldset>
+		<td>Course Name:</td>
+			<select onchange="ChangeTeacherList();" class="right" name="course" id="course">
+				<option value="">Course</option>
+				<option value="AdvancedProjects">Advanced Projects</option>
+				<option value="ApUsHistory">AP US History</option>
+			</select>
+    </fieldset>
+	<fieldset>
+		<td>Course Teacher:</td>
+			<select onchange="if (this.selectedIndex) ChangePeriodList();" class="right" name="teacher" id="teacher"></select>
+			<script>
+				var coursesandTeachers = {};
+				coursesandTeachers["AdvancedProjects"] = ["Mr.Srock"];
+				coursesandTeachers["ApUsHistory"] = ["Mr.Alcorn"];
+				
+				function ChangeTeacherList() {
+					var courseList = document.getElementById("course");
+					var TeacherList = document.getElementById("teacher");
+					var selCourse = courseList.options[coursesandTeachers.selectedIndex].value;
+					while (teacherList.options.length) {
+					teacherList.remove(0);
+					}
+					var course = coursesandTeachers[selCourse];
+					if (course) {
+						var i;
+						for (i = 0; i < course.length; i++) {
+							var course = new Option(course[i], i);
+							teacherList.options.add(course);
+						}
+					}
+				}
+			</script>
+    </fieldset>
+	<fieldset>
+		<td>Test Period:</td>
+			<select class="right" name="period" id="period"></select>
+			<script>
+				var teacherandPeriod = {};
+				teacherandPeriod['Mr.Srock'] = ['1','2'];
+				teacherandPeriod['Mr.Alcorn'] = ['2','4'];
+				
+				function ChangePeriodList() {
+					var teacherList = document.getElementById("teacher");
+					var TeacherList = document.getElementById("period");
+					var selTeacher = teacherList.options[teacherandPeriod.selectedIndex].value;
+					while (periodList.options.length) {
+					periodList.remove(0);
+					}
+					var teacher = teacherandPeriod[selTeacher];
+					if (teacher) {
+						var i;
+						for (i = 0; i < teacher.length; i++) {
+							var teacher = new Option(teacher[i], i);
+							periodList.options.add(teacher);
+						}
+					}
+				}
+			</script>
+    </fieldset>
+    <fieldset>
+      <textarea type="textarea" id="Accommodations" name="Accommodations"placeholder="Accommodations Requested:" tabindex=6" required></textarea>
+    </fieldset>
+    <fieldset>
+      <button name="button" type="button" id="Accommodation-button" onclick="mailFunction()" data-button="...Sending">Submit</button>
+    </fieldset>
+  </document>
+</div>
+</html>
